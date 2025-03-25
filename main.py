@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsView, QGraphicsScene, QGraphicsRectItem, QGraphicsEllipseItem
+from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsView, QGraphicsScene, QGraphicsRectItem, QGraphicsEllipseItem, QToolBar, QAction
 from PyQt5.QtCore import Qt
 
 class DrawingScene(QGraphicsScene):
@@ -25,9 +25,27 @@ class SimpleDrawingApp(QMainWindow):
         super().__init__()
         self.setWindowTitle("Basic Drawing Tool")
         self.setGeometry(100, 100, 800, 600)
+
         self.scene = DrawingScene()
         self.view = QGraphicsView(self.scene)
         self.setCentralWidget(self.view)
+
+        self.create_toolbar()
+
+    def create_toolbar(self):
+        toolbar = QToolBar("Drawing Tools")
+        self.addToolBar(toolbar)
+
+        rect_action = QAction("Rectangle", self)
+        rect_action.triggered.connect(lambda: self.set_mode("rectangle"))
+        toolbar.addAction(rect_action)
+
+        ellipse_action = QAction("Ellipse", self)
+        ellipse_action.triggered.connect(lambda: self.set_mode("ellipse"))
+        toolbar.addAction(ellipse_action)
+
+    def set_mode(self, mode):
+        self.scene.mode = mode
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

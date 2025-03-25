@@ -1,15 +1,15 @@
-```
+
 # Drawing App
 
 This is a simple drawing application built using PyQt.
 
-## Features
+ Features
 
 - Create drawings with basic tools
 - Save and load your artwork
 - Easy-to-use interface
 
-## Requirements
+Requirements
 
 - Python 3.x
 - PyQt5
